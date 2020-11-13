@@ -165,7 +165,7 @@ export default {
           res.data.result.map((v) => {
             v.isChecked = false;
           });
-          console.log(res.data.result);
+          // console.log(res.data.result);
           this.allshopdata = res.data.result;
         }
       });
@@ -177,7 +177,7 @@ export default {
       if (!tokenString) {
         return this.$router.push({ name: "Login" });
       }
-      console.log(tokenString);
+      // console.log(tokenString);
       // 检查是否登录↑
       this.axios({
         method: "POST",

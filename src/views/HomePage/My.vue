@@ -16,7 +16,7 @@
         </div>
         <div class="my_desc">
           <div class="name">{{ my.nickName }}</div>
-          <div class="signature">
+          <div class="signature van-multi-ellipsis--l2">
             {{ (my.desc = '""' ? "这个家伙很懒，什么都没留下" : my.desc) }}
           </div>
         </div>
@@ -85,12 +85,9 @@ export default {
     width: 90%;
     border-radius: 12px;
     padding: 10px;
-    min-height: 200px;
 
     .my_information {
       display: flex;
-      align-items: center;
-      padding: 5px;
       margin-bottom: 15px;
       .Avatar {
         width: 80px;
@@ -100,8 +97,12 @@ export default {
       }
 
       .my_desc {
+        width: calc(~"100% - 100px");
         margin-left: 20px;
-        line-height: 35px;
+        display: flex;
+        padding: 5px 0;
+        justify-content: space-around;
+        flex-direction: column;
         .name {
           color: skyblue;
           font-weight: bolder;

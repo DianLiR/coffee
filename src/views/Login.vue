@@ -180,11 +180,11 @@ export default {
             } else {
               this.$toast.fail(res.data.msg);
             }
-            console.log(res);
+            // console.log(res);
           })
           .catch((res) => {
             this.$toast.clear();
-            console.log(res);
+            // console.log(res);
           });
       }
     },
@@ -232,7 +232,7 @@ export default {
           })
           .catch((res) => {
             this.$toast.clear();
-            console.log(res);
+            // console.log(res);
           });
       }
     },

@@ -88,7 +88,7 @@ axios.interceptors.request.use((config) => {
 			paramS += `${key}=${config.data[key]}&`;
 		}
 		config.data = paramS.slice(0, -1);
-		console.log(config);
+		// console.log(config);
 	}
 	return config;
 });

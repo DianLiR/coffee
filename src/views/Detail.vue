@@ -166,7 +166,7 @@ export default {
       })
         .then((res) => {
           this.$toast.clear();
-          console.log(res);
+          // console.log(res);
           if (res.data.code == 600) {
             // localStorage.setItem("Kf_tk", res.data.token);
             let data = res.data.result[0];
@@ -194,7 +194,7 @@ export default {
         })
         .catch((err) => {
           this.$toast.clear();
-          console.log(err);
+          // console.log(err);
         });
     },
     // 切换选项
@@ -239,7 +239,7 @@ export default {
           tokenString,
         },
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.code == 700) {
           this.$route.push({ name: "Login" });
         } else if (res.data.code == 800) {
@@ -261,7 +261,7 @@ export default {
         pid: this.pid,
       };
       let prodata = [];
-      console.log(this.productDetail.rules);
+      // console.log(this.productDetail.rules);
       this.productDetail.rules.map((v) => {
         prodata.push(v.rule[v.ruleIndex].title);
       });
