@@ -10,7 +10,7 @@
     </van-nav-bar>
     <div class="pay_box">
       <div class="address_box">
-        <van-cell title="选择收货地址" is-link />
+        <van-cell title="选择收货地址" is-link @click="select_address" />
         <div class="user_box">
           <div class="user_info">
             <div class="user_name">张三</div>
@@ -24,18 +24,60 @@
           </div>
         </div>
       </div>
-      <div class="order_info"></div>
+      <div class="order_info">
+        <OrderList
+          titleLeft="订单信息"
+          :count="proInfo.count"
+          :total="proInfo.total"
+        >
+          <OrderItem
+            v-for="(item, index) in products"
+            :key="index"
+            :item="item"
+          ></OrderItem>
+        </OrderList>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import "../assets/less/pay.less";
+import OrderList from "../../components/OrderList";
+import OrderItem from "../../components/OrderItem";
 export default {
   name: "Pay",
+  data() {
+    return {
+      isOpen: false,
+      Check_address: "",
+      address_list: [],
+      current_address: {},
+      sids: [],
+      products: [],
+      proInfo: {
+        count: 0,
+        total: 0,
+      },
+    };
+  },
+  components: {
+    OrderList,
+    OrderItem,
+  },
   methods: {
     onClickLeft() {
       this.$router.back(-1);
+    },
+    new_address() {
+      this.$router.push({ name: "NewAddress" });
+    },
+    select_address() {
+      this.isOpen = false;
+      this.current_address = item;
+    },
+    show_address_list() {
+      this.isOpen = true;
     },
   },
 };
