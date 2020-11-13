@@ -1,0 +1,63 @@
+.pay {
+    padding: 46px 15px 60px;
+
+    .address_box {
+        margin: 10px 0;
+        background-color: #fff;
+        min-height: 100px;
+        // border-radius: 10px;
+        border-radius: 10px 0 10px 0;
+        padding: 5px;
+
+        /deep/ .van-cell__title,
+        .van-cell__value {
+            flex: none
+        }
+
+        /deep/ .van-cell {
+            padding: 5px;
+        }
+
+        .user_box {
+            padding: 5px;
+            display: flex;
+            flex-flow: row wrap;
+
+
+            .user_info {
+                display: flex;
+                align-items: center;
+                width: 100%;
+
+                .user_phone {
+                    margin-left: 10px;
+                }
+
+                >div {
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+            }
+
+            .address_info {
+                margin-top: 10px;
+                line-height: 20px;
+
+                .tag {
+                    float: left;
+                    height: 20px;
+                    text-align: center;
+                    line-height: 20px;
+                    color: white;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    width: 40px;
+                    background-color: skyblue;
+                    font-size: 12px;
+                    margin-right: 10px;
+                }
+
+            }
+        }
+    }
+}

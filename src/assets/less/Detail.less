@@ -1,0 +1,89 @@
+.info_box {
+    margin: 46px 0;
+
+    .Pro_content {
+        position: relative;
+        width: 95%;
+        top: -20px;
+        border-radius: 12px;
+        margin: auto;
+        background-color: white;
+        padding: 1px 15px;
+
+        .pro_info>div {
+            border-bottom: 1px solid #f1f1f19d;
+            padding: 15px 0;
+        }
+
+        // border: 1px solid #000;
+        .prop_box {
+            align-items: center;
+            justify-content: space-between;
+
+            .box_l {
+                text-align: left;
+
+                .pro_name {
+                    font-weight: bolder;
+                    font-size: 18px;
+                }
+
+                .pro_enname {
+                    color: gray;
+                }
+            }
+
+            .box_r {
+                color: #3498db;
+                font-weight: bolder;
+            }
+        }
+
+        .pro_rule {
+
+            .rule_item {
+                margin-bottom: 10px;
+                align-items: center;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .rule_title {
+                    width: 45px;
+                    text-align: left;
+                }
+
+                .rule_title_item {
+                    margin-left: 15px;
+
+                    .t_item {
+                        background-color: #c2c2c2;
+                        padding: 1px 15px;
+                        border-radius: 20px;
+                        margin: 0 5px;
+
+                        &.active {
+                            background-color: #3498db;
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+
+        .Quantity {
+            justify-content: space-between;
+        }
+
+        .desc_box {
+            text-align: left;
+            flex-direction: column;
+
+            .desc_text {
+                font-size: 12px;
+                color: #bdc3c7;
+            }
+        }
+    }
+}

@@ -1,27 +1,71 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+	{
+		path: "/Login",
+		name: "Login",
+		component: () => import("../views/Login.vue"),
+	},
+	{
+		path: "/main",
+		name: "Main",
+		component: () => import("../views/Main.vue"),
+		children: [
+			{
+				path: "home",
+				name: "Home",
+				component: () => import("../views/HomePage/Home.vue"),
+			},
+			{
+				path: "menu",
+				name: "Menu",
+				component: () => import("../views/HomePage/Menu.vue"),
+			},
+			{
+				path: "shopbag",
+				name: "Shopbag",
+				component: () => import("../views/HomePage/Shopbag.vue"),
+			},
+			{
+				path: "my",
+				name: "My",
+				component: () => import("../views/HomePage/My.vue"),
+			},
+		],
+	},
+	{
+		path: "/detail/:pid",
+		name: "Detail",
+		component: () => import("../views/Detail.vue"),
+	},
+	{
+		path: "/addresseset",
+		name: "AddressSet",
+		component: () => import("../views/User/AddressSet.vue"),
+	},
+	{
+		path: "/pay",
+		name: "Pay",
+		component: () => import("../views/Pay.vue"),
+	},
+	{
+		path: "/address",
+		name: "Address",
+		component: () => import("../views/User/Address.vue"),
+	},
+	{
+		path: "*",
+		redirect: {
+			name: "Home",
+		},
+	},
+];
 
 const router = new VueRouter({
-  routes
-})
+	routes,
+});
 
-export default router
+export default router;

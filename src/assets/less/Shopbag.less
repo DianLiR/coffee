@@ -1,0 +1,52 @@
+.shopbag {
+    padding: 50px 0;
+
+    // .Shopbag_ad {
+    //     // margin-top: 50px;
+    // }
+
+    .shopbag_box {
+        margin-bottom: 20px;
+
+        .shopbag_item {
+            margin-bottom: 5px;
+
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .delete-button {
+                height: 100%;
+            }
+
+            .check_box {
+                position: absolute;
+                z-index: 999;
+                top: 50%;
+                margin-top: -10px;
+                margin: -10px 10px 0px;
+            }
+
+            /deep/ .van-card {
+                padding-left: 40px;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+
+                /deep/ .van-card__content {
+                    text-align: left;
+                }
+            }
+
+        }
+
+        /deep/ .van-submit-bar__bar {
+            justify-content: space-between;
+        }
+
+        /deep/ .van-submit-bar {
+            margin-bottom: 50px;
+        }
+    }
+}
