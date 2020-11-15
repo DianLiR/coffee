@@ -83,7 +83,9 @@ export default {
           this.$route.push({ name: "Login" });
         } else if (res.data.code == 9000 || res.data.code == 30000) {
           setTimeout(() => {
-            this.$router.push({ name: "Address" });
+            // this.$router.push({ name: "Address" });
+            this.$router.back
+            (-1);
           }, 500);
         }
         this.$toast(res.data.msg);
@@ -94,7 +96,6 @@ export default {
       if (!tokenString) {
         return this.$router.push({ name: "Login" });
       }
-      // 检查是否登录↑
       this.axios({
         method: "GET",
         url: "/findAddressByAid",
@@ -120,7 +121,6 @@ export default {
       if (!tokenString) {
         return this.$router.push({ name: "Login" });
       }
-      // 检查是否登录↑
       this.axios({
         method: "POST",
         url: "/deleteAddress",

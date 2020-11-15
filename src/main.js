@@ -39,6 +39,8 @@ import {
 	GoodsActionButton,
 	GoodsActionIcon,
 	AddressList,
+	Tabs,
+	Tab,
 } from "vant";
 
 //注册Button组件
@@ -53,6 +55,8 @@ Vue.use(Button)
 	.use(Swipe)
 	.use(Card)
 	.use(Toast)
+	.use(Tabs)
+	.use(Tab)
 	.use(Icon)
 	.use(ShareSheet)
 	.use(Sku)
@@ -97,6 +101,45 @@ Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
+// 添加小数
+Vue.filter("Decimal_res", (item, n = 2) => {
+	return item.toFixed(n);
+});
+
+Vue.filter("Time_format", (value, format) => {
+	let date = new Date(value);
+
+	// 格式化年份位数
+	let year = date.getFullYear().toString();
+	if (/(y+)/.test(format)) {
+		let content = RegExp.$1;
+		format = format.replace(content, year.slice(year.length - content.length));
+	}
+
+	let o = {
+		M: date.getMonth() + 1,
+		d: date.getDate(),
+		h: date.getHours(),
+		m: date.getMinutes(),
+		s: date.getSeconds(),
+	};
+	// console.log(o);
+	for (const key in o) {
+		let reg = new RegExp(`(${key}+)`);
+		if (reg.test(format)) {
+			let Match_content = RegExp.$1;
+			format = format.replace(
+				Match_content,
+				o[key] >= 10
+					? o[key]
+					: Match_content.length == 2
+					? "0" + o[key]
+					: o[key]
+			);
+		}
+	}
+	return format;
+});
 new Vue({
 	router,
 	render: (h) => h(App),

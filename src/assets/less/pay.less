@@ -14,6 +14,10 @@
             flex: none
         }
 
+        .default_address {
+            word-wrap: break-word
+        }
+
         /deep/ .van-cell {
             padding: 5px;
         }
@@ -60,4 +64,49 @@
             }
         }
     }
+
+
+    .btn_box {
+        position: fixed;
+        // left: 0;
+        bottom: 10px;
+        margin-left: 5px;
+        padding: 10px;
+        width: calc(~"100% - 40px");
+    }
+
+    /deep/ .van-address-list {
+        padding: 20px 10px 45px;
+    }
+
+    /deep/ .van-radio-group {
+        margin-top: 10px;
+    }
+
+    /deep/ .van-tag--danger {
+        background-color: #3498db;
+    }
+
+    /deep/ .van-address-item .van-radio__icon--checked .van-icon {
+        background-color: #3498db;
+        border: #3498db;
+    }
+
+    /deep/ .van-address-item {
+        border-bottom: 1px solid #e8e8e8;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    /deep/ .van-button--danger {
+        background-color: #3498db;
+        border-color: #3498db;
+    }
+
+    /deep/ .van-address-item__tag {
+        padding: 0 6px;
+    }
+
 }

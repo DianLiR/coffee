@@ -10,16 +10,16 @@
     </van-nav-bar>
     <div class="pay_box">
       <div class="address_box">
-        <van-cell title="选择收货地址" is-link @click="select_address" />
+        <van-cell title="选择收货地址" is-link @click="show_address_list" />
         <div class="user_box">
           <div class="user_info">
-            <div class="user_name">张三</div>
-            <div class="user_phone">13800138000</div>
+            <div class="user_name">{{ current_address.name }}</div>
+            <div class="user_phone">{{ current_address.tel }}</div>
           </div>
           <div class="address_info">
-            <div class="tag">默认</div>
+            <div class="tag" v-if="current_address.isDefault">默认</div>
             <div class="default_address">
-              广东省广州市天河区广东省广州市天河区广东省广州市天河区
+              {{ current_address.address }}
             </div>
           </div>
         </div>
@@ -38,13 +38,28 @@
         </OrderList>
       </div>
     </div>
+    <div class="btn_box">
+      <van-button type="primary" round block @click="paySubmit"
+        >提交</van-button
+      >
+    </div>
+    <van-popup v-model="isOpen" round position="bottom" lazy-render closeable>
+      <van-address-list
+        :list="address_list"
+        default-tag-text="默认"
+        v-model="Check_address"
+        @add="add"
+        @select="select_address"
+        @edit="edit"
+      />
+    </van-popup>
   </div>
 </template>
 
 <script>
 import "../assets/less/pay.less";
-import OrderList from "../../components/OrderList";
-import OrderItem from "../../components/OrderItem";
+import OrderList from "../components/OrderList";
+import OrderItem from "../components/OrderItem";
 export default {
   name: "Pay",
   data() {
@@ -61,6 +76,11 @@ export default {
       },
     };
   },
+  created() {
+    this.sids = this.$route.query.sids.split("-");
+    this.get_shopbag_sids();
+    this.get_address_data();
+  },
   components: {
     OrderList,
     OrderItem,
@@ -69,15 +89,116 @@ export default {
     onClickLeft() {
       this.$router.back(-1);
     },
-    new_address() {
-      this.$router.push({ name: "NewAddress" });
+    add() {
+      // 新增地址
+      this.$router.push({ name: "AddressSet" });
     },
-    select_address() {
+    edit(item) {
+      this.$router.push({ name: "AddressSet", query: { aid: item.aid } });
+    },
+    select_address(item) {
+      // 选择地址
       this.isOpen = false;
       this.current_address = item;
     },
     show_address_list() {
+      // 展示地址列表
       this.isOpen = true;
+    },
+    get_shopbag_sids() {
+      let tokenString = localStorage.getItem("Kf_tk");
+      if (!tokenString) {
+        return this.$router.push({ name: "Login" });
+      }
+      this.axios({
+        method: "GET",
+        url: "/commitShopcart",
+        params: {
+          appkey: this.appkey,
+          tokenString,
+          sids: JSON.stringify(this.sids),
+        },
+      }).then((res) => {
+        if (res.data.code == 700) {
+          this.$router.push({ name: "Login" });
+        } else if (res.data.code == 50000) {
+          if (res.data.result.length == 0) {
+            return this.$router.push({ name: "Home" });
+          }
+          res.data.result.map((v) => {
+            this.proInfo.count += v.count;
+            this.proInfo.total += v.count * v.price;
+          });
+          this.products = res.data.result;
+        }
+      });
+    },
+
+    pay() {
+      let tokenString = localStorage.getItem("Kf_tk");
+      if (!tokenString) {
+        return this.$router.push({ name: "Login" });
+      }
+      this.axios({
+        method: "POST",
+        url: "/pay",
+        data: {
+          appkey: this.appkey,
+          tokenString,
+          sids: JSON.stringify(this.sids),
+          phone: this.current_address.tel,
+          address: this.current_address.address,
+          receiver: this.current_address.name,
+        },
+      }).then((res) => {
+        if (res.data.code == 700) {
+          this.$router.push({ name: "Login" });
+        } else {
+          setTimeout(() => {
+            this.$router.push({ name: "Order" });
+          }, 300);
+        }
+      });
+    },
+    paySubmit() {
+      this.$dialog
+        .confirm({
+          title: "确认订单",
+          message: "立即结算",
+        })
+        .then(() => {
+          this.pay();
+        });
+    },
+    get_address_data() {
+      let tokenString = localStorage.getItem("Kf_tk");
+      if (!tokenString) {
+        return this.$router.push({ name: "Login" });
+      }
+      this.axios({
+        method: "GET",
+        url: "/findAddress",
+        params: {
+          appkey: this.appkey,
+          tokenString,
+        },
+      }).then((res) => {
+        if (res.data.code == 700) {
+          this.$router.push({ name: "Login" });
+        } else if (res.data.code == 20000) {
+          res.data.result.map((item) => {
+            item.isDefault = Boolean(item.isDefault);
+            item.id = item.aid;
+            item.address = `${item.province}${item.city}${item.county}${item.addressDetail}`;
+            if (item.isDefault) {
+              this.Check_address = item.aid;
+              this.current_address = item;
+            }
+          });
+          this.address_list = res.data.result;
+          console.log(this.address_list);
+        }
+      });
     },
   },
 };

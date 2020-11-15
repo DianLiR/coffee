@@ -9,8 +9,8 @@
         margin-bottom: 20px;
 
         .shopbag_item {
-            margin-bottom: 5px;
-
+            // margin-bottom: 5px;
+            padding: 0 10px;
 
             &:last-child {
                 margin-bottom: 0;
@@ -24,11 +24,16 @@
                 position: absolute;
                 z-index: 999;
                 top: 50%;
-                margin-top: -10px;
                 margin: -10px 10px 0px;
             }
 
+            /deep/ .van-swipe-cell {
+                margin: 5px 0;
+                border-radius: 10px;
+            }
+
             /deep/ .van-card {
+                margin: 0;
                 padding-left: 40px;
                 display: flex;
                 align-items: flex-end;

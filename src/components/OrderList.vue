@@ -23,7 +23,7 @@
         <div class="date" v-if="data != ''">{{ data }}</div>
         <div class="close">
           <div class="amount">共计{{ count }} 件</div>
-          <div class="total">合计 ￥{{ total }}</div>
+          <div class="total">&#21512;&#35745;&#65509;{{ total }}</div>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@ export default {
     },
     isRight: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     data: {
       type: String,
@@ -62,7 +62,7 @@ export default {
 
   methods: {
     confirm() {
-      this.$emit("confirm_receive");
+      this.$emit("confirm");
     },
     remove() {
       this.$emit("remove");

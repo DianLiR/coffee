@@ -192,6 +192,7 @@ export default {
           this.$router.push({ name: "Login" });
         } else if (res.data.code == 7000) {
           this.allshopdata.splice(index, 1);
+          this.sum();
         }
       });
     },
@@ -252,7 +253,9 @@ export default {
               i--;
             }
           }
+          this.sum();
         }
+        this.$toast(res.data.msg);
       });
     },
 

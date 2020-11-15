@@ -22,11 +22,13 @@
         </div>
       </div>
       <div class="information_liss">
-        <van-cell title="个人资料" is-link url="#" />
-        <van-cell title="我的订单" is-link to="#" />
-        <van-cell title="我的收藏" is-link url="#" />
-        <van-cell title="收货地址" is-link to="/Address" />
-        <van-cell title="安全中心" is-link url="#" />
+        <van-cell
+          :title="item.title"
+          is-link
+          :to="item.url"
+          v-for="(item, index) in userInfo"
+          :key="index"
+        />
       </div>
     </div>
   </div>
@@ -37,6 +39,13 @@ export default {
   name: "My",
   data() {
     return {
+      userInfo: [
+        { title: "个人资料", url: "#" },
+        { title: "我的订单", url: "/order" },
+        { title: "我的收藏", url: "#" },
+        { title: "收货地址", url: "/address" },
+        { title: "安全中心", url: "#" },
+      ],
       my: {},
     };
   },

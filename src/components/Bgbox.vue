@@ -21,13 +21,13 @@ export default {
     z-index: 0;
   }
   .box-content {
-    margin: 0 10px;
+    margin: 0 15px;
     position: relative;
     top: -25px;
     background-color: white;
-    min-height: 50px;
     border-radius: 7px;
     padding: 10px;
+    overflow: hidden;
   }
 }
 </style>

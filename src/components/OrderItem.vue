@@ -1,15 +1,15 @@
 <template>
   <div class="orderitem">
     <van-card
-      price="2.00"
+      :price="item.price"
       lazy-load
       :desc="item.rule"
       :title="item.name"
-      :thumb="item.small_img"
+      :thumb="item.small_img || item.smallImg"
       :num="item.count"
     >
       <template #tags>
-        <van-tag plain type="primary" color="#7232dd">{{
+        <van-tag plain type="primary" color="#7232dd" v-if="item.type_desc">{{
           item.type_desc
         }}</van-tag>
       </template>
@@ -20,6 +20,9 @@
 <script>
 export default {
   name: "OrderItem",
+  created() {
+    // console.log(this.item);
+  },
   props: {
     item: {
       type: Object,
@@ -42,6 +45,9 @@ export default {
 
 <style lang="less" scoped>
 .orderitem {
+  /deep/.van-card {
+    background-color: white;
+  }
   /deep/.van-card__price {
     color: #1ea1d4;
   }
