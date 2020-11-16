@@ -41,6 +41,7 @@ import {
 	AddressList,
 	Tabs,
 	Tab,
+	Uploader,
 } from "vant";
 
 //注册Button组件
@@ -67,6 +68,7 @@ Vue.use(Button)
 	.use(Cell)
 	.use(Checkbox)
 	.use(Tag)
+	.use(Uploader)
 	.use(SubmitBar)
 	.use(AddressEdit)
 	.use(Area)

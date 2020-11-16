@@ -128,7 +128,7 @@ export default {
             o.data = [item];
             orderData.push(o);
           });
-          this.orderListData = orderData;
+          this.orderListData = orderData.reverse();
         }
       });
     },

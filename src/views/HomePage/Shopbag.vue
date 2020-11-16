@@ -135,6 +135,12 @@ export default {
         }
       }
       this.isAllcheck = true;
+      // this.isAllcheck = this.allshopdata.every((item) => {
+      //   if (!item.isChecked) {
+      //     return false;
+      //   }
+      //   return true;
+      // });
     },
 
     // 返回按钮
@@ -194,6 +200,13 @@ export default {
           this.allshopdata.splice(index, 1);
           this.sum();
         }
+      });
+      this.isAllcheck = this.allshopdata.some((item) => {
+        // console.log(item);
+        if (!item.isChecked) {
+          return false;
+        }
+        return true;
       });
     },
 

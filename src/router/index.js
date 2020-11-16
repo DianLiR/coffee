@@ -62,6 +62,11 @@ const routes = [
 		component: () => import("../views/User/Address.vue"),
 	},
 	{
+		path: "/userset",
+		name: "Userset",
+		component: () => import("../views/User/UserSet.vue"),
+	},
+	{
 		path: "*",
 		redirect: {
 			name: "Home",
