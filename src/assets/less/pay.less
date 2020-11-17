@@ -1,112 +1,113 @@
 .pay {
-    padding: 46px 15px 60px;
+	padding: 46px 15px 60px;
 
-    .address_box {
-        margin: 10px 0;
-        background-color: #fff;
-        min-height: 100px;
-        // border-radius: 10px;
-        border-radius: 10px 0 10px 0;
-        padding: 5px;
+	.address_box {
+		margin: 10px 0;
+		background-color: #fff;
+		min-height: 100px;
+		// border-radius: 10px;
+		border-radius: 10px 0 10px 0;
+		padding: 5px;
 
-        /deep/ .van-cell__title,
-        .van-cell__value {
-            flex: none
-        }
+		/deep/ .van-cell__title,
+		.van-cell__value {
+			flex: none;
+		}
 
-        .default_address {
-            word-wrap: break-word
-        }
+		.default_address {
+			word-wrap: break-word;
+		}
 
-        /deep/ .van-cell {
-            padding: 5px;
-        }
+		/deep/ .van-cell {
+			padding: 5px;
+		}
 
-        .user_box {
-            padding: 5px;
-            display: flex;
-            flex-flow: row wrap;
+		.user_box {
+			padding: 5px;
+			display: flex;
+			flex-flow: row wrap;
 
+			.user_info {
+				display: flex;
+				align-items: center;
+				width: 100%;
 
-            .user_info {
-                display: flex;
-                align-items: center;
-                width: 100%;
+				.user_phone {
+					margin-left: 10px;
+				}
 
-                .user_phone {
-                    margin-left: 10px;
-                }
+				> div {
+					font-weight: bold;
+					font-size: 18px;
+				}
+			}
 
-                >div {
-                    font-weight: bold;
-                    font-size: 18px;
-                }
-            }
+			.address_info {
+				margin-top: 10px;
+				line-height: 20px;
 
-            .address_info {
-                margin-top: 10px;
-                line-height: 20px;
+				.tag {
+					float: left;
+					height: 20px;
+					text-align: center;
+					line-height: 20px;
+					color: white;
+					border-radius: 10px;
+					font-weight: bold;
+					width: 40px;
+					background-color: skyblue;
+					font-size: 12px;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
 
-                .tag {
-                    float: left;
-                    height: 20px;
-                    text-align: center;
-                    line-height: 20px;
-                    color: white;
-                    border-radius: 10px;
-                    font-weight: bold;
-                    width: 40px;
-                    background-color: skyblue;
-                    font-size: 12px;
-                    margin-right: 10px;
-                }
+	.btn_box {
+		position: fixed;
+		// left: 0;
+		bottom: 10px;
+		margin-left: 5px;
+		padding: 10px;
+		width: calc(~'100% - 40px');
+	}
 
-            }
-        }
-    }
+	/deep/ .van-address-list {
+		padding: 20px 10px 50px;
+	}
 
+	/deep/ .van-radio-group {
+		margin-top: 10px;
+		min-height: 30px;
+	}
 
-    .btn_box {
-        position: fixed;
-        // left: 0;
-        bottom: 10px;
-        margin-left: 5px;
-        padding: 10px;
-        width: calc(~"100% - 40px");
-    }
+	/deep/ .van-tag--danger {
+		background-color: #3498db;
+	}
 
-    /deep/ .van-address-list {
-        padding: 20px 10px 45px;
-    }
+	/deep/ .van-address-item .van-radio__icon--checked .van-icon {
+		background-color: #3498db;
+		border: #3498db;
+	}
+	/deep/.van-address-list__bottom{
+		bottom: 5px;
+	}
 
-    /deep/ .van-radio-group {
-        margin-top: 10px;
-    }
+	/deep/ .van-address-item {
+		border-bottom: 1px solid #e8e8e8;
 
-    /deep/ .van-tag--danger {
-        background-color: #3498db;
-    }
+		&:last-child {
+			border-bottom: none;
+		}
+	}
 
-    /deep/ .van-address-item .van-radio__icon--checked .van-icon {
-        background-color: #3498db;
-        border: #3498db;
-    }
+	/deep/ .van-button--danger {
+		background-color: #3498db;
+		border-color: #3498db;
+		margin-bottom: 5px;
+	}
 
-    /deep/ .van-address-item {
-        border-bottom: 1px solid #e8e8e8;
-
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-
-    /deep/ .van-button--danger {
-        background-color: #3498db;
-        border-color: #3498db;
-    }
-
-    /deep/ .van-address-item__tag {
-        padding: 0 6px;
-    }
-
+	/deep/ .van-address-item__tag {
+		padding: 0 6px;
+	}
 }

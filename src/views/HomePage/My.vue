@@ -42,10 +42,10 @@ export default {
     return {
       userInfo: [
         { title: "个人资料", to: "/userset" },
-        { title: "我的订单", to: "/order" },
-        { title: "我的收藏", to: "#" },
-        { title: "收货地址", to: "/address" },
-        { title: "安全中心", to: "#" },
+        { title: "我的订单", to: "/Order" },
+        { title: "我的收藏", to: "/Collect" },
+        { title: "收货地址", to: "/Address" },
+        { title: "安全中心", to: "/Safety" },
       ],
       my: {},
     };
@@ -113,6 +113,7 @@ export default {
           this.my.userBg = res.data.userBg;
         }
         this.$toast(res.data.msg);
+        location.reload();
       });
     },
   },
@@ -147,6 +148,13 @@ export default {
 
   .my_box {
     background-color: white;
+    background-image: linear-gradient(
+      to bottom,
+      #ffffff13 0,
+      #ffffffb6 2.4rem,
+      #fff 2.4rem,
+      #fff 100%
+    );
     position: relative;
     top: -60px;
     margin: auto;

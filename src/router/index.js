@@ -67,6 +67,16 @@ const routes = [
 		component: () => import("../views/User/UserSet.vue"),
 	},
 	{
+		path: "/collect",
+		name: "Collect",
+		component: () => import("../views/User/Collect.vue"),
+	},
+	{
+		path: "/safety",
+		name: "Safety",
+		component: () => import("../views/User/Safety.vue"),
+	},
+	{
 		path: "*",
 		redirect: {
 			name: "Home",

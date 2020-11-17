@@ -34,6 +34,8 @@ import {
 	SubmitBar,
 	Tag,
 	AddressEdit,
+	Grid, 
+	GridItem,
 	Area,
 	GoodsAction,
 	GoodsActionButton,
@@ -68,6 +70,8 @@ Vue.use(Button)
 	.use(Cell)
 	.use(Checkbox)
 	.use(Tag)
+	.use(Grid)
+	.use(GridItem)
 	.use(Uploader)
 	.use(SubmitBar)
 	.use(AddressEdit)

@@ -56,7 +56,7 @@
       class="register-box"
       v-model="isShow"
       position="bottom"
-      :style="{ height: '38%' }"
+      :style="{ height: '45%' }"
       closeable
       round
     >

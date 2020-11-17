@@ -9,13 +9,23 @@
     >
     </van-nav-bar>
     <Bgbox>
-      <van-address-list
-        :list="addList"
-        default-tag-text="默认"
-        :switchable="false"
-        @add="add"
-        @edit="edit"
-      />
+      <div v-if="addList.length > 0">
+        <van-address-list
+          :list="addList"
+          default-tag-text="默认"
+          :switchable="false"
+          @add="add"
+          @edit="edit"
+        />
+      </div>
+
+      <div v-else>
+        <van-empty description="未添加地址">
+          <van-button round block type="info" @click="add()"
+            >添加地址</van-button
+          >
+        </van-empty>
+      </div>
     </Bgbox>
   </div>
 </template>
@@ -84,6 +94,7 @@ export default {
 .address {
   /deep/ .van-address-list {
     padding: 0;
+    min-height: 40px;
   }
   /deep/ .van-tag--danger {
     background-color: #3498db;
@@ -100,6 +111,9 @@ export default {
   }
   /deep/ .van-address-item__tag {
     padding: 0 6px;
+  }
+  /deep/ .van-empty__bottom {
+    width: 80%;
   }
 }
 </style>

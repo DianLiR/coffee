@@ -33,6 +33,7 @@
         label="昵称"
         placeholder="输入昵称"
         input-align="right"
+        @change="updataName"
       />
       <van-field
         rows="1"
@@ -42,6 +43,7 @@
         type="textarea"
         input-align="right"
         placeholder="请输入简介"
+        @change="updataDesc"
         maxlength="25"
       />
     </Bgbox>
@@ -133,6 +135,59 @@ export default {
           this.my.userImg = res.data.userImg;
         }
         this.$toast(res.data.msg);
+        location.reload();
+      });
+    },
+    updataName() {
+      if (!this.my.nickName) {
+        this.$toast("昵称不能为空");
+      }
+      let tokenString = localStorage.getItem("Kf_tk");
+      if (!tokenString) {
+        return this.$router.push({ name: "Login" });
+      }
+      // 检查是否登录↑
+      this.axios({
+        method: "POST",
+        url: "/updateNickName",
+        data: {
+          appkey: this.appkey,
+          tokenString,
+          nickName: this.my.nickName,
+        },
+      }).then((res) => {
+        console.log(res);
+        if (res.data.code == 700) {
+          this.$router.push({ name: "Login" });
+        } else {
+          this.$toast(res.data.msg);
+        }
+      });
+    },
+    updataDesc() {
+      if (!this.my.nickName) {
+        this.$toast("昵称不能为空");
+      }
+      let tokenString = localStorage.getItem("Kf_tk");
+      if (!tokenString) {
+        return this.$router.push({ name: "Login" });
+      }
+      // 检查是否登录↑
+      this.axios({
+        method: "POST",
+        url: "/updateDesc",
+        data: {
+          appkey: this.appkey,
+          tokenString,
+          desc: this.my.desc,
+        },
+      }).then((res) => {
+        console.log(res);
+        if (res.data.code == 700) {
+          this.$router.push({ name: "Login" });
+        } else {
+          this.$toast(res.data.msg);
+        }
       });
     },
   },
