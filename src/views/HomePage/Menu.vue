@@ -2,7 +2,11 @@
   <div class="menu">
     <div class="menu_nav">
       <div class="menu_search">
-        <van-search shape="round" placeholder="请输入搜索关键词" />
+        <van-search
+          shape="round"
+          placeholder="请输入搜索关键词"
+          @focus="searchF"
+        />
       </div>
       <div class="menu_option">
         <div
@@ -138,8 +142,8 @@ export default {
         }
       });
     },
-    getDetail(pid) {
-      this.$rotuer.push({ name: "Detail", params: { pid } });
+    goDetail(pid) {
+      this.$router.push({ name: "Detail", params: { pid } });
     },
     searchF() {
       this.$rotuer.push({ name: Search });
