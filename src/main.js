@@ -34,7 +34,7 @@ import {
 	SubmitBar,
 	Tag,
 	AddressEdit,
-	Grid, 
+	Grid,
 	GridItem,
 	Area,
 	GoodsAction,
@@ -98,7 +98,7 @@ axios.interceptors.request.use((config) => {
 			paramS += `${key}=${config.data[key]}&`;
 		}
 		config.data = paramS.slice(0, -1);
-		// console.log(config);
+		//
 	}
 	return config;
 });
@@ -129,7 +129,7 @@ Vue.filter("Time_format", (value, format) => {
 		m: date.getMinutes(),
 		s: date.getSeconds(),
 	};
-	// console.log(o);
+	//
 	for (const key in o) {
 		let reg = new RegExp(`(${key}+)`);
 		if (reg.test(format)) {

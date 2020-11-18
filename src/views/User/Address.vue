@@ -74,7 +74,7 @@ export default {
             item.id = item.id;
             item.address = `${item.province}${item.city}${item.county}${item.addressDetail}`;
           });
-          console.log("addlist=>>>", res.data.result);
+
           this.addList = res.data.result;
         }
       });

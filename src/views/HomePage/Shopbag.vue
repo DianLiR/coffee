@@ -116,9 +116,9 @@ export default {
     // 全选按钮
     AllSelect() {
       // 全选
-      // console.log(this.allshopdata);
+      //
       this.allshopdata.map((v) => {
-        // console.log(item.isChecked);
+        //
         v.isChecked = this.isAllcheck;
       });
       this.sum();
@@ -170,11 +170,10 @@ export default {
           res.data.result.map((v) => {
             v.isChecked = false;
           });
-          // console.log(res.data.result);
+          //
           this.allshopdata = res.data.result;
         }
       });
-      console.log("this.allshopdata==>", this.allshopdata);
     },
 
     // 删除单个商品
@@ -183,7 +182,7 @@ export default {
       if (!tokenString) {
         return this.$router.push({ name: "Login" });
       }
-      // console.log(tokenString);
+      //
       // 检查是否登录↑
       this.axios({
         method: "POST",
@@ -202,7 +201,7 @@ export default {
         }
       });
       this.isAllcheck = this.allshopdata.some((item) => {
-        // console.log(item);
+        //
         if (!item.isChecked) {
           return false;
         }
@@ -213,7 +212,7 @@ export default {
     // 是否选中商品
     isSelectPro() {
       // this.allshopdata.forEach((item) => {
-      //   console.log(item);
+      //
       //   if (item.isChecked) {
       //     return true;
       //   }

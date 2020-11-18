@@ -84,8 +84,7 @@ export default {
         } else if (res.data.code == 9000 || res.data.code == 30000) {
           setTimeout(() => {
             // this.$router.push({ name: "Address" });
-            this.$router.back
-            (-1);
+            this.$router.back(-1);
           }, 500);
         }
         this.$toast(res.data.msg);
@@ -109,7 +108,7 @@ export default {
           this.$router.push({ name: "Login" });
         } else if (res.data.code == 40000) {
           let data = res.data.result[0];
-          // console.log("data=>", res);
+          //
           data.isDefault = Boolean(data.isDefault);
           this.addressInfo = data;
         }

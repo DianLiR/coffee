@@ -45,7 +45,6 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-      console.log(this.$refs);
       let search_ipt = this.$refs.search.querySelector('[type="search"]');
       search_ipt.focus();
     });
@@ -69,7 +68,6 @@ export default {
       }).then((res) => {
         if (res.data.code == "Q001") {
           this.productData = res.data.result;
-          console.log("res", res);
         } else {
           this.$toast(res.data.msg);
         }

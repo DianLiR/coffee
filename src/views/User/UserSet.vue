@@ -86,7 +86,6 @@ export default {
           tokenString,
         },
       }).then((res) => {
-        console.log(res);
         if (res.data.code == 700) {
           this.$router.push({ name: "Login" });
         } else if (res.data.code == "B001") {
@@ -101,7 +100,7 @@ export default {
     // 修改头像
     afterRead(file) {
       let type = ["gif", "png", "jpg", "jpeg"];
-      console.log(file);
+
       let size = 1;
       let fileType = file.file.type.split("/")[1];
       if (type.indexOf(fileType) === -1) {
@@ -133,7 +132,6 @@ export default {
         if (res.data.code == 700) {
           this.$router.push({ name: "Login" });
         } else if (res.data.code == "I001") {
-          console.log("res=>", res);
           this.my.userImg = res.data.userImg;
         }
         this.$toast(res.data.msg);
@@ -158,7 +156,6 @@ export default {
           nickName: this.my.nickName,
         },
       }).then((res) => {
-        console.log(res);
         if (res.data.code == 700) {
           this.$router.push({ name: "Login" });
         } else {
@@ -184,7 +181,6 @@ export default {
           desc: this.my.desc,
         },
       }).then((res) => {
-        console.log(res);
         if (res.data.code == 700) {
           this.$router.push({ name: "Login" });
         } else {

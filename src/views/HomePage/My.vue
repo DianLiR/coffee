@@ -77,7 +77,7 @@ export default {
     },
     afterRead(file) {
       let type = ["gif", "png", "jpg", "jpeg"];
-      console.log(file);
+
       let size = 1;
       let fileType = file.file.type.split("/")[1];
       if (type.indexOf(fileType) === -1) {
@@ -109,7 +109,6 @@ export default {
         if (res.data.code == 700) {
           this.$router.push({ name: "Login" });
         } else if (res.data.code == "I001") {
-          console.log("res=>", res);
           this.my.userBg = res.data.userBg;
         }
         this.$toast(res.data.msg);

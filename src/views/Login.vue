@@ -157,7 +157,7 @@ export default {
       };
       let isCorrect = verification.valid(o);
       if (isCorrect) {
-        // console.log(this.appkey);
+        //
         let userInfo = Object.assign({}, this.userRegisterInfo);
         userInfo.appkey = this.appkey;
 
@@ -180,11 +180,11 @@ export default {
             } else {
               this.$toast.fail(res.data.msg);
             }
-            // console.log(res);
+            //
           })
           .catch((res) => {
             this.$toast.clear();
-            // console.log(res);
+            //
           });
       }
     },
@@ -206,7 +206,7 @@ export default {
       };
       let isCorrect = verification.valid(o);
       if (isCorrect) {
-        // console.log(this.appkey);
+        //
         let userInfo = Object.assign({}, this.userInfo);
         userInfo.appkey = this.appkey;
 
@@ -232,7 +232,7 @@ export default {
           })
           .catch((res) => {
             this.$toast.clear();
-            // console.log(res);
+            //
           });
       }
     },

@@ -21,7 +21,7 @@
 export default {
   name: "OrderItem",
   created() {
-    // console.log(this.item);
+    //
   },
   props: {
     item: {

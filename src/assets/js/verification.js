@@ -4,7 +4,7 @@ Vue.use(Toast);
 class Verification {
 	constructor() {}
 	valid(o) {
-		// console.log("验证", o);
+		//
 
 		for (let key in o) {
 			if (!o[key].reg.test(o[key].value)) {

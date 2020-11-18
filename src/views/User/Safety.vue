@@ -153,8 +153,6 @@ export default {
         if (!tokenString) {
           return this.$router.push({ name: "Login" });
         }
-        console.log("this.password.new_p=>", this.password.new_p);
-        console.log("this.password.old_p=>", this.password.old_p);
 
         this.axios({
           method: "POST",

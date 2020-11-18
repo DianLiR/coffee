@@ -104,16 +104,16 @@ export default {
         params: { appkey: this.appkey },
       })
         .then((res) => {
-          // console.log(res);
+          //
           if (res.data.code == 300) {
             this.bann_data = res.data.result;
           } else {
           }
-          // console.log(res);
+          //
         })
         .catch((res) => {
           // this.$toast.clear();
-          // console.log(res);
+          //
         });
     },
     gethotpro() {
@@ -123,16 +123,16 @@ export default {
         params: { appkey: this.appkey, key: "isHot", value: 1 },
       })
         .then((res) => {
-          // console.log(res);
+          //
           if (res.data.code == 500) {
             this.hotpro_data = res.data.result;
           } else {
           }
-          // console.log(res);
+          //
         })
         .catch((res) => {
           // this.$toast.clear();
-          // console.log(res);
+          //
         });
     },
     GotoDetial(pid) {

@@ -108,7 +108,7 @@ export default {
             this.isHas = false;
             return;
           }
-          //   console.log(res);
+          //
           let orderData = [];
           res.data.result.map((item) => {
             for (let i = 0; i < orderData.length; i++) {
@@ -133,7 +133,6 @@ export default {
       });
     },
     confirm_order(item, i) {
-      console.log("确认收货");
       let tokenString = localStorage.getItem("Kf_tk");
       if (!tokenString) {
         return this.$router.push({ name: "Login" });
@@ -160,7 +159,6 @@ export default {
       });
     },
     remove_order(item, i) {
-      console.log("删除");
       let tokenString = localStorage.getItem("Kf_tk");
       if (!tokenString) {
         return this.$router.push({ name: "Login" });
