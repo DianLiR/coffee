@@ -10,7 +10,11 @@
       </template>
       <template #right>
         <div class="home-search">
-          <van-search placeholder="请输入搜索关键词" />
+          <van-search
+            shape="round"
+            placeholder="请输入搜索关键词"
+            @focus="searchF"
+          />
         </div>
       </template>
     </van-nav-bar>
@@ -90,6 +94,9 @@ export default {
     this.gethotpro();
   },
   methods: {
+    searchF() {
+      this.$router.push({ name: "Search" });
+    },
     getbannImg() {
       this.axios({
         method: "GET",

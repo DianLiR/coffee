@@ -27,6 +27,7 @@ export default {
     background-color: white;
     border-radius: 7px;
     padding: 10px;
+    min-height: 50px;
     overflow: hidden;
   }
 }

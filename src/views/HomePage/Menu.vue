@@ -146,7 +146,7 @@ export default {
       this.$router.push({ name: "Detail", params: { pid } });
     },
     searchF() {
-      this.$rotuer.push({ name: Search });
+      this.$router.push({ name: "Search" });
     },
   },
 };

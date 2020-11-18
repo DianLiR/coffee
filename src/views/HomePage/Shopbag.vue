@@ -23,7 +23,7 @@
         :src="require('../../assets/images/shopbag_bg.png')"
       />
     </div>
-    <div v-if="allshopdata.lenngth == 0">
+    <div v-if="allshopdata.length == 0">
       <van-empty description="购物袋空空如也,先去逛一逛" />
     </div>
 
@@ -111,7 +111,6 @@ export default {
   },
   created() {
     this.getshopdata();
-    // console.log(this.allshopdata);
   },
   methods: {
     // 全选按钮
@@ -175,6 +174,7 @@ export default {
           this.allshopdata = res.data.result;
         }
       });
+      console.log("this.allshopdata==>", this.allshopdata);
     },
 
     // 删除单个商品

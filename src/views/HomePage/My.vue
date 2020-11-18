@@ -86,7 +86,7 @@ export default {
       }
       let fileSize = file.file.size / 1024 / 1024;
       if (fileSize > size) {
-        this.$toast(`文件超过允许大小${size}MB`);
+        this.$toast(`文件不允许超过${size}MB`);
         return;
       }
       let base64 = file.content.replace(/^data:image\/[A-Za-z]+;base64,/, "");

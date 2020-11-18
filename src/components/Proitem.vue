@@ -7,7 +7,7 @@
         <div class="pro_enname one-text">{{ item.enname }}</div>
         <div class="pro_ss">
           <div class="pro_price">{{ item.price }}</div>
-          <div class="delete" v-if="isRemove" @click.stop="remove()">
+          <div class="delete" v-if="is_remove" @click.stop="remove()">
             <van-icon name="delete" />
           </div>
         </div>
@@ -26,9 +26,9 @@ export default {
         return {};
       },
     },
-    isRemove: {
+    is_remove: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   methods: {

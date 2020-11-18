@@ -85,7 +85,7 @@
     <van-goods-action>
       <van-goods-action-icon
         icon="bag"
-        :badge="bagCount"
+        :badge="bagCount == 0 ? '' : bagCount"
         text="购物车"
         :to="{
           name: 'Shopbag',

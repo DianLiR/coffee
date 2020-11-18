@@ -26,6 +26,7 @@
           label="旧密码"
           placeholder="旧密码"
           autocomplete="off"
+          clearable
           :type="isdisplay_old ? 'password' : 'text'"
           :right-icon="isdisplay_old ? 'closed-eye' : 'eye-o'"
           @click-right-icon="toggleShowPass('isdisplay_old')"
@@ -35,6 +36,7 @@
           name="新密码"
           label="新密码"
           placeholder="新密码"
+          clearable
           autocomplete="off"
           :type="isdisplay_new ? 'password' : 'text'"
           :right-icon="isdisplay_new ? 'closed-eye' : 'eye-o'"

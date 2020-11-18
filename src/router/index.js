@@ -77,6 +77,11 @@ const routes = [
 		component: () => import("../views/User/Safety.vue"),
 	},
 	{
+		path: "/search",
+		name: "Search",
+		component: () => import("../views/Search.vue"),
+	},
+	{
 		path: "*",
 		redirect: {
 			name: "Home",
