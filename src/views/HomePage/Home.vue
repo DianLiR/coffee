@@ -5,7 +5,7 @@
       <template #left>
         <div class="home-nav">
           <div class="title">中午好</div>
-          <div class="title_sub">ALi</div>
+          <div class="title_sub">{{user_info.nickName}}</div>
         </div>
       </template>
       <template #right>
@@ -87,6 +87,7 @@ export default {
     return {
       bann_data: [],
       hotpro_data: [],
+	  user_info:{}
     };
   },
   created() {
@@ -138,6 +139,24 @@ export default {
     GotoDetial(pid) {
       this.$router.push({ name: "Detail", params: { pid } });
     },
+	get_user_info(){
+		let tokenString = localStorage.getItem("Kf_tk");
+		if (!tokenString) {
+		  return this.$router.push({ name: "Login" });
+		}
+		this.axios({
+		  method: "GET",
+		  url: "/findMy",
+		  params: {
+		    appkey: this.appkey,
+		    tokenString,
+		  },
+		}).then((res) => {
+		  if (res.data.code == "A001") {
+		    this.user_info=res.data.result[0]
+		  }
+		});
+	}
   },
 };
 </script>
