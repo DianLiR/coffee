@@ -148,7 +148,6 @@ export default {
 					this.text = `${time}秒后重新发送`;
 				}
 			}, 500);
-			
 
 			this.$toast.loading({
 				message: '加载中...',
@@ -167,44 +166,45 @@ export default {
 			});
 		},
 		commit() {
-			let o={
-				phone:{
-					value:this.userInfo.phone,
-					errorMsg:'手机号码格式错误',
-					reg:'/^(?:(?:\+|00)86)?1[3-9]\d{9}$/'
+			let o = {
+				phone: {
+					value: this.userInfo.phone,
+					errorMsg: '手机号码格式错误',
+					reg: /^(?:(?:\+|00)86)?1[3-9]\d{9}$/
 				},
-				password:{
-					value:this.userInfo.password,
-					errorMsg:'密码格式错误',
+				password: {
+					value: this.userInfo.password,
+					errorMsg: '密码格式错误',
 					reg: /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).*$/
+					// 密码强度校验，最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
 				}
-			}
-			let isCorrect = verification.valid(o);
-			if (!isCorrect) {
-				this.$toast.loading({
-					message:'加载中...',
-					forbidClick:true,
-					duration:0
-				})
-				this.axios({
-					method:'POST',
-					url:'/retrievePassword',
-					data:{
-						appkey:this.appkey,
-						phone:this.userInfo.phone,
-						password:this.userInfo.password
-					}
-				}).then(res=>{
-					this.$toast.clear()
-					this.$toast(res.data.msg)
-					if(res.data.code =="L001"){
-						setTimeout(()=>{
-							this.goLogin()
-						},500)
-					}
-				}
-				)
 			};
+			let isCorrect = verification.valid(o);
+			if (isCorrect) {
+				this.$toast.loading({
+					message: '加载中...',
+					forbidClick: true,
+					duration: 0
+				});
+				this.axios({
+					method: 'POST',
+					url: '/retrievePassword',
+					data: {
+						appkey: this.appkey,
+						phone: this.userInfo.phone,
+						password: this.userInfo.password
+					}
+				}).then(res => {
+					console.log(res);
+					this.$toast.clear();
+					this.$toast(res.data.msg);
+					if (res.data.code == 'L001') {
+						setTimeout(() => {
+							this.goLogin();
+						}, 500);
+					}
+				});
+			}
 		}
 	}
 };

@@ -18,7 +18,7 @@
         <div class="my_desc">
           <div class="name">{{ my.nickName }}</div>
           <div class="signature van-multi-ellipsis--l2">
-            {{ (my.desc = '""' ? "这个家伙很懒，什么都没留下" : my.desc) }}
+            {{ my.desc = '' ? '这个家伙很懒，什么都没留下' : my.desc }}
           </div>
         </div>
       </div>
@@ -52,6 +52,7 @@ export default {
   },
   created() {
     this.user_initialization();
+	console.log(this.my);
   },
   methods: {
     user_initialization() {
@@ -72,6 +73,7 @@ export default {
           this.$router.push({ name: "Login" });
         } else if (res.data.code == "A001") {
           this.my = res.data.result[0];
+		  console.log("this.my==>",this.my);
         }
       });
     },

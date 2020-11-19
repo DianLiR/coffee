@@ -100,6 +100,7 @@ export default {
   name: "Shopbag",
   data() {
     return {
+		formPath:"",
       // 全选
       isAllcheck: false,
 
@@ -112,6 +113,20 @@ export default {
   created() {
     this.getshopdata();
   },
+  beforeRouteEnter(to, from, next) {
+  	 next(vm => {
+  	    // 通过 `vm` 访问组件实例,将值传入fromPath
+  	    vm.fromPath = from.path
+  	  })
+  },
+  mounted(){
+    this.$nextTick(()=>{
+      // 验证是否获取到了上页的url
+      /* eslint-disable no-console */
+      console.log(this.fromPath)
+    })
+  },
+  
   methods: {
     // 全选按钮
     AllSelect() {
@@ -328,4 +343,6 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" >
+	
+</style>

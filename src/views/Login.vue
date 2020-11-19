@@ -73,7 +73,7 @@ export default {
 			userRegisterInfo: {
 				phone: '',
 				password: '',
-				nickname: ''
+				nickName: ''
 			},
 			isShow: false,
 			isShowPassword: true
@@ -96,8 +96,8 @@ export default {
 		// 注册验证
 		register() {
 			let o = {
-				nickname: {
-					value: this.userRegisterInfo.nickname,
+				nickName: {
+					value: this.userRegisterInfo.nickName,
 					errorMsg: '昵称格式错误',
 					// 用户名校验，4到16位（字母，数字，下划线，减号）
 					reg: /^[a-zA-Z0-9_-]{4,16}$/
