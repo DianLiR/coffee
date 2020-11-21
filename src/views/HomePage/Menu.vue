@@ -52,10 +52,10 @@
 </template>
 
 <script>
-import moduleName from "../../assets/less/menu.less";
+import moduleName from "../../assets/less/menu.less"
 export default {
   name: "Menu",
-  data() {
+  data () {
     return {
       productData: [],
       menuIndex: 0,
@@ -81,20 +81,20 @@ export default {
           activeIcon: require("../../assets/images/icons_20.gif"),
         },
       ],
-    };
+    }
   },
-  created() {
-    this.getType();
+  created () {
+    this.getType()
   },
   methods: {
-    toggletab(index, type) {
+    toggletab (index, type) {
       if (this.menuIndex == index) {
-        return;
+        return
       }
-      this.menuIndex = index;
-      this.getProductType(type);
+      this.menuIndex = index
+      this.getProductType(type)
     },
-    getType() {
+    getType () {
       this.axios({
         method: "GET",
         url: "/type",
@@ -103,34 +103,34 @@ export default {
         },
       }).then((res) => {
         if (res.data.code == 400) {
-          let data = res.data.result;
+          let data = res.data.result
           data.unshift({
             type: "isHot",
             typeDesc: "推荐",
-          });
+          })
           this.menuOptions.map((item) => {
             for (let i = 0; i < data.length; i++) {
               if (item.title == data[i].typeDesc) {
-                item.type = data[i].type;
-                break;
+                item.type = data[i].type
+                break
               }
             }
-          });
-          let type = this.menuOptions[this.menuIndex].type;
-          this.getProductType(type);
+          })
+          let type = this.menuOptions[this.menuIndex].type
+          this.getProductType(type)
         }
-      });
+      })
     },
-    getProductType(type) {
+    getProductType (type) {
       let params = {
         appkey: this.appkey,
-      };
+      }
       if (type == "isHot") {
-        params.key = "isHot";
-        params.value = 1;
+        params.key = "isHot"
+        params.value = 1
       } else {
-        params.key = "type";
-        params.value = type;
+        params.key = "type"
+        params.value = type
       }
       this.axios({
         method: "GET",
@@ -138,15 +138,15 @@ export default {
         params,
       }).then((res) => {
         if (res.data.code == 500) {
-          this.productData = res.data.result;
+          this.productData = res.data.result
         }
-      });
+      })
     },
-    goDetail(pid) {
-      this.$router.push({ name: "Detail", params: { pid } });
+    goDetail (pid) {
+      this.$router.push({ name: "Detail", params: { pid } })
     },
-    searchF() {
-      this.$router.push({ name: "Search" });
+    searchF () {
+      this.$router.push({ name: "Search" })
     },
   },
 };

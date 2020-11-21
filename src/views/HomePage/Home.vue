@@ -4,8 +4,8 @@
     <van-nav-bar>
       <template #left>
         <div class="home-nav">
-          <div class="title">中午好</div>
-          <div class="title_sub">{{user_info.nickName}}</div>
+          <div class="title">{{ Greetings }}</div>
+          <div class="title_sub">{{ user_info.nickName }}</div>
         </div>
       </template>
       <template #right>
@@ -78,27 +78,41 @@
   </div>
 </template>
 <script>
-import "../../assets/less/home.less";
+import "../../assets/less/home.less"
 
-import { verification } from "../../assets/js/verification";
+import { verification } from "../../assets/js/verification"
 export default {
   name: "Home",
-  data() {
+  data () {
     return {
       bann_data: [],
       hotpro_data: [],
-	  user_info:{}
-    };
+      user_info: {},
+      Greetings: ""
+    }
   },
-  created() {
-    this.getbannImg();
-    this.gethotpro();
+  created () {
+    this.getbannImg()
+    this.gethotpro()
+    this.get_user_info()
+    this.getDate()
   },
   methods: {
-    searchF() {
-      this.$router.push({ name: "Search" });
+    getDate () {
+      let hour = new Date().getHours()//获取时间
+      if (hour < 6) { this.Greetings = "凌晨好" }
+      else if (hour < 9) { this.Greetings = "早上好" }
+      else if (hour < 12) { this.Greetings = "上午好" }
+      else if (hour < 14) { this.Greetings = "中午好" }
+      else if (hour < 17) { this.Greetings = "下午好" }
+      else if (hour < 19) { this.Greetings = "傍晚好" }
+      else if (hour < 22) { this.Greetings = "晚上好" }
+      else { this.Greetings = "夜里好" }
     },
-    getbannImg() {
+    searchF () {
+      this.$router.push({ name: "Search" })
+    },
+    getbannImg () {
       this.axios({
         method: "GET",
         url: "/banner",
@@ -107,7 +121,7 @@ export default {
         .then((res) => {
           //
           if (res.data.code == 300) {
-            this.bann_data = res.data.result;
+            this.bann_data = res.data.result
           } else {
           }
           //
@@ -115,9 +129,9 @@ export default {
         .catch((res) => {
           // this.$toast.clear();
           //
-        });
+        })
     },
-    gethotpro() {
+    gethotpro () {
       this.axios({
         method: "GET",
         url: "/typeProducts",
@@ -126,7 +140,7 @@ export default {
         .then((res) => {
           //
           if (res.data.code == 500) {
-            this.hotpro_data = res.data.result;
+            this.hotpro_data = res.data.result
           } else {
           }
           //
@@ -134,29 +148,30 @@ export default {
         .catch((res) => {
           // this.$toast.clear();
           //
-        });
+        })
     },
-    GotoDetial(pid) {
-      this.$router.push({ name: "Detail", params: { pid } });
+    GotoDetial (pid) {
+      this.$router.push({ name: "Detail", params: { pid } })
     },
-	get_user_info(){
-		let tokenString = localStorage.getItem("Kf_tk");
-		if (!tokenString) {
-		  return this.$router.push({ name: "Login" });
-		}
-		this.axios({
-		  method: "GET",
-		  url: "/findMy",
-		  params: {
-		    appkey: this.appkey,
-		    tokenString,
-		  },
-		}).then((res) => {
-		  if (res.data.code == "A001") {
-		    this.user_info=res.data.result[0]
-		  }
-		});
-	}
+    get_user_info () {
+      let tokenString = localStorage.getItem("Kf_tk")
+      // if (!tokenString) {
+      // return this.$router.push({ name: "Login" })
+      // }
+      this.axios({
+        method: "GET",
+        url: "/findMy",
+        params: {
+          appkey: this.appkey,
+          tokenString,
+        },
+      }).then((res) => {
+        if (res.data.code == "A001") {
+          this.user_info = res.data.result[0]
+
+        }
+      })
+    }
   },
 };
 </script>

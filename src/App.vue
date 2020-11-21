@@ -20,6 +20,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   color: #34495e;
+  max-width: 495px;
   // text-align: center;
   // padding: 50px 0;
 }

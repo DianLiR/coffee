@@ -17,7 +17,13 @@ export default {
 .bg-box {
   .bg {
     height: 120px;
-    background-color: #3498db;
+    background-image: linear-gradient(
+      to top,
+      #ecf0f1 0%,
+      #c0e1f0 50%,
+      #b5e2f7 100%
+    );
+    // background-color: #3498db;
     z-index: 0;
   }
   .box-content {

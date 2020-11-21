@@ -18,7 +18,7 @@
         <div class="my_desc">
           <div class="name">{{ my.nickName }}</div>
           <div class="signature van-multi-ellipsis--l2">
-            {{ my.desc = '' ? '这个家伙很懒，什么都没留下' : my.desc }}
+            {{ my.desc || "这家伙很懒，什么也没有留下！" }}
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
 <script>
 export default {
   name: "My",
-  data() {
+  data () {
     return {
       userInfo: [
         { title: "个人资料", to: "/userset" },
@@ -48,17 +48,17 @@ export default {
         { title: "安全中心", to: "/Safety" },
       ],
       my: {},
-    };
+    }
   },
-  created() {
-    this.user_initialization();
-	console.log(this.my);
+  created () {
+    this.user_initialization()
+
   },
   methods: {
-    user_initialization() {
-      let tokenString = localStorage.getItem("Kf_tk");
+    user_initialization () {
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "Login" })
       }
       // 检查是否登录↑
       this.axios({
@@ -70,33 +70,39 @@ export default {
         },
       }).then((res) => {
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else if (res.data.code == "A001") {
-          this.my = res.data.result[0];
-		  console.log("this.my==>",this.my);
+          this.my = res.data.result[0]
+
         }
-      });
+      })
     },
-    afterRead(file) {
-      let type = ["gif", "png", "jpg", "jpeg"];
+    afterRead (file) {
+      let type = ["gif", "png", "jpg", "jpeg"]
 
-      let size = 1;
-      let fileType = file.file.type.split("/")[1];
+      let size = 1
+      let fileType = file.file.type.split("/")[1]
       if (type.indexOf(fileType) === -1) {
-        this.$toast(`当前文件格式不支持,仅支持${type.join(",")}`);
-        return;
+        this.$toast(`当前文件格式不支持,仅支持${type.join(",")}`)
+        return
       }
-      let fileSize = file.file.size / 1024 / 1024;
+      let fileSize = file.file.size / 1024 / 1024
       if (fileSize > size) {
-        this.$toast(`文件不允许超过${size}MB`);
-        return;
+        this.$toast(`文件不允许超过${size}MB`)
+        return
       }
-      let base64 = file.content.replace(/^data:image\/[A-Za-z]+;base64,/, "");
+      let base64 = file.content.replace(/^data:image\/[A-Za-z]+;base64,/, "")
 
-      let tokenString = localStorage.getItem("Kf_tk");
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "Login" })
       }
+
+      this.$toast.loading({
+        message: "加载中...",
+        forbidClick: true,
+        duration: 0,
+      })
       // 检查是否登录↑
       this.axios({
         method: "POST",
@@ -108,14 +114,15 @@ export default {
           serverBase64Img: base64,
         },
       }).then((res) => {
+        this.$toast.clear()
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else if (res.data.code == "I001") {
-          this.my.userBg = res.data.userBg;
+          this.my.userBg = res.data.userBg
         }
-        this.$toast(res.data.msg);
-        location.reload();
-      });
+        this.$toast(res.data.msg)
+        location.reload()
+      })
     },
   },
 };
@@ -124,7 +131,7 @@ export default {
 <style lang="less" scoped>
 .my {
   height: 92vh;
-  background-color: #f5f5f5;
+  background-color: #e7e7e733;
   .my_bg {
     height: 180px;
     position: relative;
@@ -148,10 +155,10 @@ export default {
   }
 
   .my_box {
-    background-color: white;
+    // background-color: white;
     background-image: linear-gradient(
       to bottom,
-      #ffffff13 0,
+      #ffffff27 0,
       #ffffffb6 2.4rem,
       #fff 2.4rem,
       #fff 100%

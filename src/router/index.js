@@ -80,7 +80,8 @@ const routes = [
 		path: "/search",
 		name: "Search",
 		component: () => import("../views/Search.vue"),
-	},{
+	},
+	{
 		path: "/forgot",
 		name: "Forgot",
 		component: () => import("../views/Forgot.vue"),

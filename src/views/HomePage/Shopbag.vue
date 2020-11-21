@@ -11,7 +11,9 @@
     >
       <template #right>
         <!-- 切换模式 -->
-        <div v-if="allshopdata.length > 0">{{ isEdit ? "完成" : "编辑" }}</div>
+        <div v-show="isShwedit">
+          {{ isEdit ? "完成" : "编辑" }}
+        </div>
       </template>
     </van-nav-bar>
     <div class="Shopbag_ad">
@@ -95,12 +97,12 @@
 </template>
 
 <script>
-import "../../assets/less/Shopbag.less";
+import "../../assets/less/Shopbag.less"
 export default {
   name: "Shopbag",
-  data() {
+  data () {
     return {
-		formPath:"",
+      formPath: "",
       // 全选
       isAllcheck: false,
 
@@ -108,47 +110,56 @@ export default {
       allshopdata: [],
       isEdit: false,
       total: 0,
-    };
+    }
   },
-  created() {
-    this.getshopdata();
+  computed: {
+    isShwedit: function () {
+      if (this.allshopdata.length == 0) {
+        return false
+      } else {
+        return true
+      }
+    }
   },
-  beforeRouteEnter(to, from, next) {
-  	 next(vm => {
-  	    // 通过 `vm` 访问组件实例,将值传入fromPath
-  	    vm.fromPath = from.path
-  	  })
+  created () {
+    this.getshopdata()
   },
-  mounted(){
-    this.$nextTick(()=>{
-      // 验证是否获取到了上页的url
-      /* eslint-disable no-console */
-      console.log(this.fromPath)
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例,将值传入fromPath
+      vm.fromPath = from.path
     })
   },
-  
+  mounted () {
+    this.$nextTick(() => {
+      // 验证是否获取到了上页的url
+      /* eslint-disable no-console */
+
+    })
+  },
+
   methods: {
     // 全选按钮
-    AllSelect() {
+    AllSelect () {
       // 全选
       //
       this.allshopdata.map((v) => {
         //
-        v.isChecked = this.isAllcheck;
-      });
-      this.sum();
+        v.isChecked = this.isAllcheck
+      })
+      this.sum()
     },
 
     // 单选按钮
-    simpleSelect() {
-      this.sum();
+    simpleSelect () {
+      this.sum()
       for (let i = 0; i < this.allshopdata.length; i++) {
         if (!this.allshopdata[i].isChecked) {
-          this.isAllcheck = false;
-          return;
+          this.isAllcheck = false
+          return
         }
       }
-      this.isAllcheck = true;
+      this.isAllcheck = true
       // this.isAllcheck = this.allshopdata.every((item) => {
       //   if (!item.isChecked) {
       //     return false;
@@ -158,17 +169,19 @@ export default {
     },
 
     // 返回按钮
-    onClickLeft() {
+    onClickLeft () {
       //   this.$toast("返回");
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
 
     // 获购物袋数据
-    getshopdata() {
+    getshopdata () {
       // 获取token
-      let tokenString = localStorage.getItem("Kf_tk");
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$toast("未登录")
+        // return
+        // return this.$router.push({ name: "Login" })
       }
       // 检查是否登录↑
       this.axios({
@@ -180,22 +193,22 @@ export default {
         },
       }).then((res) => {
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else if (res.data.code == 5000) {
           res.data.result.map((v) => {
-            v.isChecked = false;
-          });
+            v.isChecked = false
+          })
           //
-          this.allshopdata = res.data.result;
+          this.allshopdata = res.data.result
         }
-      });
+      })
     },
 
     // 删除单个商品
-    removeOne(index, sid) {
-      let tokenString = localStorage.getItem("Kf_tk");
+    removeOne (index, sid) {
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "Login" })
       }
       //
       // 检查是否登录↑
@@ -209,23 +222,23 @@ export default {
         },
       }).then((res) => {
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else if (res.data.code == 7000) {
-          this.allshopdata.splice(index, 1);
-          this.sum();
+          this.allshopdata.splice(index, 1)
+          this.sum()
         }
-      });
+      })
       this.isAllcheck = this.allshopdata.some((item) => {
         //
         if (!item.isChecked) {
-          return false;
+          return false
         }
-        return true;
-      });
+        return true
+      })
     },
 
     // 是否选中商品
-    isSelectPro() {
+    isSelectPro () {
       // this.allshopdata.forEach((item) => {
       //
       //   if (item.isChecked) {
@@ -234,28 +247,28 @@ export default {
       // });
       for (let i = 0; i < this.allshopdata.length; i++) {
         if (this.allshopdata[i].isChecked) {
-          return true;
+          return true
         }
       }
-      return false;
+      return false
     },
 
     // 删除选中项
-    removeSelected() {
-      let isHas = this.isSelectPro();
+    removeSelected () {
+      let isHas = this.isSelectPro()
       if (!isHas) {
-        this.$toast("未选择");
-        return;
+        // this.$toast("未选择")
+        return
       }
-      let sids = [];
+      let sids = []
       this.allshopdata.map((v) => {
         if (v.isChecked) {
-          sids.push(v.sid);
+          sids.push(v.sid)
         }
-      });
-      let tokenString = localStorage.getItem("Kf_tk");
+      })
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "Login" })
       }
       this.axios({
         method: "POST",
@@ -267,7 +280,7 @@ export default {
         },
       }).then((res) => {
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else if (res.data.code == 7000) {
           // this.allshopdata.forEach((item, i) => {
           //   if (item[i].isChecked) {
@@ -276,21 +289,21 @@ export default {
           // });
           for (let i = 0; i < this.allshopdata.length; i++) {
             if (this.allshopdata[i].isChecked) {
-              this.allshopdata.splice(i, 1);
-              i--;
+              this.allshopdata.splice(i, 1)
+              i--
             }
           }
-          this.sum();
+          this.sum()
         }
-        this.$toast(res.data.msg);
-      });
+        // this.$toast(res.data.msg)
+      })
     },
 
     // 数量修改
-    changeCount(item) {
-      let tokenString = localStorage.getItem("Kf_tk");
+    changeCount (item) {
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "Login" })
       }
       // 检查是否登录↑
       this.axios({
@@ -304,45 +317,44 @@ export default {
         },
       }).then((res) => {
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else if (res.data.code == 6000) {
           if (item.isChecked) {
-            this.sum();
+            this.sum()
           }
         }
-      });
+      })
     },
 
     // 计算总额
-    sum() {
-      this.total = 0;
+    sum () {
+      this.total = 0
       this.allshopdata.map((item) => {
         if (item.isChecked) {
-          this.total += item.price * item.count;
+          this.total += item.price * item.count
         }
-      });
-      this.total *= 100;
+      })
+      this.total *= 100
     },
 
     // 提交订单按钮
-    commit() {
-      let isHas = this.isSelectPro();
+    commit () {
+      let isHas = this.isSelectPro()
       if (!isHas) {
-        this.$toast("未选择商品");
-        return;
+        // this.$toast("未选择商品")
+        return
       }
-      let sids = [];
+      let sids = []
       this.allshopdata.map((item) => {
         if (item.isChecked) {
-          sids.push(item.sid);
+          sids.push(item.sid)
         }
-      });
-      this.$router.push({ name: "Pay", query: { sids: sids.join("-") } });
+      })
+      this.$router.push({ name: "Pay", query: { sids: sids.join("-") } })
     },
   },
 };
 </script>
 
 <style lang="less" >
-	
 </style>

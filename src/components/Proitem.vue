@@ -3,7 +3,7 @@
     <div>
       <van-image width="100%" height="100%" fit="cover" :src="item.smallImg" />
       <div class="item_text">
-        <div class="pro_name">{{ item.name }}</div>
+        <div class="pro_name van-ellipsis">{{ item.name }}</div>
         <div class="pro_enname one-text">{{ item.enname }}</div>
         <div class="pro_ss">
           <div class="pro_price">{{ item.price }}</div>
@@ -22,8 +22,8 @@ export default {
   props: {
     item: {
       type: Object,
-      default() {
-        return {};
+      default () {
+        return {}
       },
     },
     is_remove: {
@@ -32,8 +32,8 @@ export default {
     },
   },
   methods: {
-    remove() {
-      this.$emit("remove");
+    remove () {
+      this.$emit("remove")
     },
   },
 };
