@@ -44,6 +44,8 @@ import {
 	Tabs,
 	Tab,
 	Uploader,
+	Loading,
+	Sticky,
 } from "vant";
 
 //注册Button组件
@@ -57,6 +59,7 @@ Vue.use(Button)
 	.use(Search)
 	.use(Swipe)
 	.use(Card)
+	.use(Sticky)
 	.use(Toast)
 	.use(Tabs)
 	.use(Tab)
@@ -69,6 +72,7 @@ Vue.use(Button)
 	.use(VanImage)
 	.use(Cell)
 	.use(Checkbox)
+	.use(Loading)
 	.use(Tag)
 	.use(Grid)
 	.use(GridItem)

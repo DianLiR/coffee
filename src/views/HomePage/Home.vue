@@ -1,23 +1,28 @@
 <template>
   <div class="home">
     <!-- 头部 -->
-    <van-nav-bar>
-      <template #left>
-        <div class="home-nav">
-          <div class="title">{{ Greetings }}</div>
-          <div class="title_sub">{{ user_info.nickName }}</div>
-        </div>
-      </template>
-      <template #right>
-        <div class="home-search">
-          <van-search
-            shape="round"
-            placeholder="请输入搜索关键词"
-            @focus="searchF"
-          />
-        </div>
-      </template>
-    </van-nav-bar>
+    <van-sticky>
+      <van-nav-bar>
+        <template #left>
+          <div class="home-nav" @click="GotoUser">
+            <div class="title">{{ Greetings }}</div>
+            <div class="title_sub">{{ user_info.nickName }}</div>
+          </div>
+        </template>
+        <template #right>
+          <div class="home-search">
+            <van-search
+              shape="round"
+              placeholder="请输入搜索关键词"
+              @focus="searchF"
+            />
+          </div>
+        </template>
+      </van-nav-bar>
+
+      <!-- <van-button type="primary">基础用法</van-button> -->
+    </van-sticky>
+
     <!-- 内容 -->
     <div class="home-content">
       <!-- 轮播图-广告 -->
@@ -54,12 +59,22 @@
             >
               <div class="pro_hot" v-if="item.isHot">Hot</div>
               <div>
-                <img
+                <!-- <img
                   class="auto_img"
                   :src="item.smallImg"
                   alt="item.name"
                   :v-lazy="item.smallImg"
-                />
+                /> -->
+                <van-image
+                  class="auto_img"
+                  :src="item.smallImg"
+                  lazy-load
+                  alt="item.name"
+                >
+                  <template v-slot:loading>
+                    <van-loading type="spinner" size="20" />
+                  </template>
+                </van-image>
               </div>
               <div class="pro_info">
                 <div class="pro_name Text_abb">
@@ -152,6 +167,9 @@ export default {
     },
     GotoDetial (pid) {
       this.$router.push({ name: "Detail", params: { pid } })
+    },
+    GotoUser () {
+      this.$router.push({ name: "Userset" })
     },
     get_user_info () {
       let tokenString = localStorage.getItem("Kf_tk")

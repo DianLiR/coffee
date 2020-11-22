@@ -59,7 +59,7 @@
 
             .popular_title_box {
                 background-color: white;
-                border-radius: 30px;
+                border-radius: 30px 0 30px 0;
                 line-height: 42px;
                 height: 42px;
 
@@ -91,13 +91,19 @@
                     box-shadow: 1px 1px 5px 1px #ccc;
                     position: relative;
 
+                    .auto_img {
+                        min-height: 156.5px;
+                    }
+
                     .pro_hot {
                         position: absolute;
                         background-color: #3498db;
-                        padding: 2px;
+                        padding: 1.75px 2.5px;
                         color: white;
                         left: 15px;
                         top: 8px;
+                        border-radius: 0 0 3px 3px;
+                        z-index: 1;
                     }
 
                     &:nth-of-type(2n) {

@@ -54,12 +54,12 @@
 </template>
 
 <script>
-import "../assets/less/pay.less";
-import OrderList from "../components/OrderList";
-import OrderItem from "../components/OrderItem";
+import "../assets/less/pay.less"
+import OrderList from "../components/OrderList"
+import OrderItem from "../components/OrderItem"
 export default {
   name: "Pay",
-  data() {
+  data () {
     return {
       isOpen: false,
       Check_address: "",
@@ -71,44 +71,44 @@ export default {
         count: 0,
         total: 0,
       },
-    };
+    }
   },
-  created() {
-    this.sids = this.$route.query.sids.split("-");
-    this.get_shopbag_sids();
-    this.get_address_data();
+  created () {
+    this.sids = this.$route.query.sids.split("-")
+    this.get_shopbag_sids()
+    this.get_address_data()
   },
   components: {
     OrderList,
     OrderItem,
   },
   methods: {
-    onClickLeft() {
+    onClickLeft () {
       // 返回按钮
-      this.$router.back(-1);
+      this.$router.back(-1)
     },
-    add() {
+    add () {
       // 新增地址按钮
-      this.$router.push({ name: "AddressSet" });
+      this.$router.push({ name: "AddressSet" })
     },
-    edit(item) {
+    edit (item) {
       // 编辑地址按钮
-      this.$router.push({ name: "AddressSet", query: { aid: item.aid } });
+      this.$router.push({ name: "AddressSet", query: { aid: item.aid } })
     },
-    select_address(item) {
+    select_address (item) {
       // 选择地址
-      this.isOpen = false;
-      this.current_address = item;
+      this.isOpen = false
+      this.current_address = item
     },
-    show_address_list() {
+    show_address_list () {
       // 展示地址列表
-      this.isOpen = true;
+      this.isOpen = true
     },
     // 获取购物袋数据
-    get_shopbag_sids() {
-      let tokenString = localStorage.getItem("Kf_tk");
+    get_shopbag_sids () {
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "Login" })
       }
       this.axios({
         method: "GET",
@@ -120,25 +120,30 @@ export default {
         },
       }).then((res) => {
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else if (res.data.code == 50000) {
           if (res.data.result.length == 0) {
-            return this.$router.push({ name: "Home" });
+            return this.$router.push({ name: "Home" })
           }
           res.data.result.map((v) => {
-            this.proInfo.count += v.count;
-            this.proInfo.total += v.count * v.price;
-          });
-          this.products = res.data.result;
+            this.proInfo.count += v.count
+            this.proInfo.total += v.count * v.price
+          })
+          this.products = res.data.result
         }
-      });
+      })
     },
 
-    pay() {
-      let tokenString = localStorage.getItem("Kf_tk");
+    pay () {
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "Login" })
       }
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+      })
       this.axios({
         method: "POST",
         url: "/pay",
@@ -151,19 +156,20 @@ export default {
           receiver: this.current_address.name,
         },
       }).then((res) => {
+        this.$toast.clear()
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else {
           setTimeout(() => {
-            this.$router.push({ name: "Order" });
-          }, 300);
+            this.$router.push({ name: "Order" })
+          }, 300)
         }
-      });
+      })
     },
-    paySubmit() {
+    paySubmit () {
       if (!this.Check_address) {
-        this.$toast("未选择收货地址");
-        return;
+        this.$toast("未选择收货地址")
+        return
       }
       this.$dialog
         .confirm({
@@ -171,13 +177,13 @@ export default {
           message: "立即结算",
         })
         .then(() => {
-          this.pay();
-        });
+          this.pay()
+        })
     },
-    get_address_data() {
-      let tokenString = localStorage.getItem("Kf_tk");
+    get_address_data () {
+      let tokenString = localStorage.getItem("Kf_tk")
       if (!tokenString) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "Login" })
       }
       this.axios({
         method: "GET",
@@ -188,21 +194,21 @@ export default {
         },
       }).then((res) => {
         if (res.data.code == 700) {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" })
         } else if (res.data.code == 20000) {
           res.data.result.map((item) => {
-            item.isDefault = Boolean(item.isDefault);
-            item.id = item.aid;
-            item.address = `${item.province}${item.city}${item.county}${item.addressDetail}`;
+            item.isDefault = Boolean(item.isDefault)
+            item.id = item.aid
+            item.address = `${item.province}${item.city}${item.county}${item.addressDetail}`
             if (item.isDefault) {
-              this.Check_address = item.aid;
-              this.current_address = item;
+              this.Check_address = item.aid
+              this.current_address = item
             }
-          });
-          this.address_list = res.data.result;
+          })
+          this.address_list = res.data.result
           //
         }
-      });
+      })
     },
   },
 };

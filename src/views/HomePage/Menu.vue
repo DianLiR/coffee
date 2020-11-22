@@ -1,35 +1,37 @@
 <template>
   <div class="menu">
-    <div class="menu_nav">
-      <div class="menu_search">
-        <van-search
-          shape="round"
-          placeholder="请输入搜索关键词"
-          @focus="searchF"
-        />
-      </div>
-      <div class="menu_option">
-        <div
-          class="menu_item"
-          v-for="(item, index) in menuOptions"
-          :key="index"
-          @click="toggletab(index, item.type)"
-        >
-          <div class="m_item">
-            <div class="m_icon">
-              <img
-                :src="
-                  menuIndex == index ? item.activeIcon : item.activeIconInit
-                "
-              />
-            </div>
-            <div class="m_text" :class="{ active: menuIndex == index }">
-              {{ item.title }}
+    <van-sticky>
+      <div class="menu_nav">
+        <div class="menu_search">
+          <van-search
+            shape="round"
+            placeholder="请输入搜索关键词"
+            @focus="searchF"
+          />
+        </div>
+        <div class="menu_option">
+          <div
+            class="menu_item"
+            v-for="(item, index) in menuOptions"
+            :key="index"
+            @click="toggletab(index, item.type)"
+          >
+            <div class="m_item">
+              <div class="m_icon">
+                <img
+                  :src="
+                    menuIndex == index ? item.activeIcon : item.activeIconInit
+                  "
+                />
+              </div>
+              <div class="m_text" :class="{ active: menuIndex == index }">
+                {{ item.title }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </van-sticky>
 
     <div class="menu_product">
       <div
@@ -39,7 +41,12 @@
         @click="goDetail(item.pid)"
       >
         <div class="pro_img">
-          <img :src="item.smallImg" alt="" />
+          <!-- <img :src="item.smallImg" alt="" /> -->
+          <van-image :src="item.smallImg" lazy-load>
+            <template v-slot:loading>
+              <van-loading type="spinner" size="20" />
+            </template>
+          </van-image>
         </div>
         <div class="pro_text">
           <div class="pro_name">{{ item.name }}</div>

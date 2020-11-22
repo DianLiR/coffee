@@ -243,6 +243,13 @@ export default {
         // return this.$router.push({ name: 'Login' })
       }
       let url = this.isLike ? '/notlike' : '/like'
+
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+      })
+
       this.axios({
         method: 'POST',
         url,
@@ -252,6 +259,7 @@ export default {
           tokenString
         }
       }).then(res => {
+        this.$toast.clear()
         //
         if (res.data.code == 700) {
           this.$route.push({ name: 'Login' })
@@ -283,11 +291,18 @@ export default {
         prodata.push(v.rule[v.ruleIndex].title)
       })
       data.rule = prodata.join('/')
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+      })
+
       this.axios({
         method: 'POST',
         url: '/addShopcart',
         data
       }).then(res => {
+        this.$toast.clear()
         if (res.data.code == 700) {
           this.$route.push({ name: 'Login' })
         } else if (res.data.code == 3000) {
