@@ -11,7 +11,7 @@
           <div class="logo">
             <img class="logo_img" src="../assets/logo.png" alt="" />
           </div>
-          <div class="logo-text">Luckin</div>
+          <div class="logo-text"></div>
         </div>
       </template>
     </van-nav-bar>

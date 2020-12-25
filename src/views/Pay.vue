@@ -26,6 +26,7 @@
           titleLeft="订单信息"
           :count="proInfo.count"
           :total="proInfo.total"
+          :date="proInfo.date | Time_format('yyyy-MM-dd hh:mm:ss')"
         >
           <OrderItem
             v-for="(item, index) in products"
@@ -70,6 +71,7 @@ export default {
       proInfo: {
         count: 0,
         total: 0,
+        date: ''
       },
     }
   },
@@ -126,8 +128,10 @@ export default {
             return this.$router.push({ name: "Home" })
           }
           res.data.result.map((v) => {
+            // console.log(v)
             this.proInfo.count += v.count
             this.proInfo.total += v.count * v.price
+            this.proInfo.date = v.created_at
           })
           this.products = res.data.result
         }

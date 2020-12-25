@@ -36,6 +36,11 @@
 </template>
 
 <script>
+console.clear()
+// console.log("%c ", "margin:0 auto;padding:80px;line-height:40px;background:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606134579598&di=7cf1ee8eae8e08371542e2833d26cb70&imgtype=0&src=http%3A%2F%2Fwaaaat.storage.comocloud.net%2Fwaaaat%2F2019%2F04%2F18%2F2019041815020714be5de9.gif') no-repeat 50% 50%; ")
+console.log("%c ", "padding:100px 300px;line-height:40px;background:url('http://img.yao51.com/jiankangtuku/quacrwatx.jpeg') no-repeat 50% 50%; ")
+
+
 export default {
   name: "My",
   data () {

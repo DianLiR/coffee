@@ -93,6 +93,7 @@
   </div>
 </template>
 <script>
+console.clear()
 import "../../assets/less/home.less"
 
 import { verification } from "../../assets/js/verification"

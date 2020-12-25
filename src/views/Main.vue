@@ -22,10 +22,14 @@
   </div>
 </template>
 
+
+
 <script>
+
+
 export default {
   name: "Main",
-  data() {
+  data () {
     return {
       activeName: "Home", //激活的标签名称
       tabbarData: [
@@ -55,9 +59,12 @@ export default {
           path: "/main/my",
         },
       ],
-    };
+    }
   },
-  methods: {},
+
+  created () {
+
+  },
 };
 </script>
 

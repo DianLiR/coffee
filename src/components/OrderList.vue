@@ -20,7 +20,7 @@
           <div class="r_l"></div>
           <div class="r_r"></div>
         </div>
-        <div class="date" v-if="data != ''">{{ data }}</div>
+        <div class="date" v-if="date != ''">{{ date }}</div>
         <div class="close">
           <div class="amount">共计{{ count }} 件</div>
           <div class="total">&#21512;&#35745;&#65509;{{ total }}</div>
@@ -42,7 +42,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    data: {
+    date: {
       type: String,
       default: "2020-11-13 19:55",
     },
@@ -61,11 +61,11 @@ export default {
   },
 
   methods: {
-    confirm() {
-      this.$emit("confirm");
+    confirm () {
+      this.$emit("confirm")
     },
-    remove() {
-      this.$emit("remove");
+    remove () {
+      this.$emit("remove")
     },
   },
 };
