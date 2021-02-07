@@ -194,3 +194,6 @@ export default {
   },
 };
 </script>
+<style lang="less">
+  a{color: rgb(137, 207, 235);}
+</style>
