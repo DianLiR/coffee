@@ -1,4 +1,4 @@
-# rxcoffee
+# coffee
 
 ## Project setup
 ```
